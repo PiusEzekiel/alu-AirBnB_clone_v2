@@ -71,7 +71,7 @@ def do_deploy(archive_path):
 
     # Create a dummy HTML file
     result = run(
-        "echo 'New version' > /data/web_static/releases/{}/data/0-index.html"
+        "echo 'New version' > /data/web_static/releases/{}/data/index.html"
         .format(archive_filename))
     if result.failed:
         return False
@@ -105,3 +105,7 @@ def deploy():
         return False
     deployed = do_deploy(archive_pack)
     return deployed
+
+
+if __name__ == '__main__':
+    deploy()
