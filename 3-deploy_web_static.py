@@ -49,7 +49,8 @@ def do_deploy(archive_path):
     if result.failed:
         return False
 
-    result = run("mv /data/web_static/releases/{}/web_static/* /data/web_static/releases/{}/".format(archive_filename, archive_filename))
+    result = run("mv /data/web_static/releases/{}/web_static/* /data/web_static/releases/{}/".format(archive_filename,
+ archive_filename))
     if result.failed:
         return False
 
@@ -59,7 +60,12 @@ def do_deploy(archive_path):
         return False
 
     # Create a dummy HTML file
-    result = run("echo 'New version' | sudo tee /data/web_static/releases/{}/data/index.html".format(archive_filename))
+    result = run("echo 'New version' | sudo tee /data/web_static/releases/{}/data/0-index.html".format(archive_filename))
+    if result.failed:
+        return False
+
+    # Create a dummy custom HTML file
+    result = run("echo 'New custom version' | sudo tee /data/web_static/releases/{}/data/my_index.html".format(archive_filename))
     if result.failed:
         return False
 
